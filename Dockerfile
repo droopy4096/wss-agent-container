@@ -1,4 +1,4 @@
-FROM java
+FROM openjdk:buster
 
 ARG WSS_VERSION=19.9.1.1
 ENV WSS_VERSION=${WSS_VERSION}
@@ -7,6 +7,7 @@ RUN mkdir /opt/whitesource && \
     cd /opt/whitesource && \
     curl -LJO https://unified-agent.s3.amazonaws.com/wss-unified-agent-${WSS_VERSION}.jar && \
     curl -LJO https://github.com/whitesource/unified-agent-distribution/raw/master/standAlone/wss-unified-agent.config
+RUN apt-get update -y && apt-get install go-dep
 COPY wss-agent.sh /opt/whitesource
 # RUN curl -LJO https://github.com/whitesource/unified-agent-distribution/releases/latest/download/wss-unified-agent.jar
 
