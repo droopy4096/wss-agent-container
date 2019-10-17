@@ -14,4 +14,6 @@ WSS_OPTIONS=""
 [ -n "${WSS_PROJECT_TOKEN}" ] && WSS_OPTIONS="${WSS_OPTIONS} -projectToken ${WSS_PROJECT_TOKEN}"
 [ -n "${WSS_PROJECT_VERSION}" ] && WSS_OPTIONS="${WSS_OPTIONS} -projectVersion ${WSS_PROJECT_VERSION}"
 
+[ -f /opt/whitesource/wss-agent-pre.sh ] && . /opt/whitesource/wss-agent-pre.sh
+
 java -jar ${WSS_HOME}/wss-unified-agent-${WSS_VERSION}.jar -c ${WSS_CONFIG} -apiKey ${WSS_API_KEY} -d ${WSS_WORKDIR} ${WSS_OPTIONS} "$@"
