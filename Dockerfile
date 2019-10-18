@@ -10,6 +10,10 @@ RUN mkdir /opt/whitesource && \
     curl -LJO https://github.com/whitesource/unified-agent-distribution/raw/master/standAlone/wss-unified-agent.config
 RUN apt-get update -y && apt-get install -y go-dep python-pip python-virtualenv
 RUN curl -sL https://deb.nodesource.com/setup_12.x | bash - && apt-get install -y nodejs
+RUN apt-get install gcc g++ make
+RUN curl -sL https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add -
+RUN echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list
+RUN apt-get update && apt-get install yarn
 RUN apt-get clean
 COPY wss-agent.sh /opt/whitesource
 # RUN curl -LJO https://github.com/whitesource/unified-agent-distribution/releases/latest/download/wss-unified-agent.jar
